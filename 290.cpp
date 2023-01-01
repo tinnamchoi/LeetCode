@@ -22,6 +22,9 @@ public:
             }
             umap[pattern[i]] = word;
         }
+        if (iss.eof() == false) {
+            return false;
+        }
         for (auto i = umap.begin(); i != umap.end(); i++) {
             for (auto j = umap.begin(); j != umap.end(); j++) {
                 if (i->first != j->first && i->second == j->second) {
