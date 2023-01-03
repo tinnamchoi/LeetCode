@@ -9,23 +9,17 @@ using namespace std;
 class Solution {
 public:
     int minDeletionSize(vector<string>& strs) {
-        // Count number of columns to be deleted
         int count = 0;
-
-        // O(NM)
-        // Iterate through each column
-        for (int col = 0; col < strs[0].size(); col++) { // O(N)
-            // Iterate through each row of the column
-            for (int row = 1; row < strs.size(); row++) { // O(M)
-                // If it is smaller than the previous row
-                if (strs[row][col] < strs[row - 1][col]) {
-                    // Increment counter and skip all remaining rows
+        for (int i = 0; i < strs[0].size(); i++) {
+            char temp = 'a' - 1;
+            for (int j = 0; j < strs.size(); j++) {
+                if (strs[j][i] < temp) {
                     count++;
                     break;
                 }
+                temp = strs[j][i];
             }
         }
-
         return count;
     }
 };
