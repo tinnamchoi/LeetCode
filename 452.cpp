@@ -37,12 +37,14 @@ public:
                     maxvalue = i.second;
                 }
             }
+            maxindex--;
             for (int i = 0; i < points.size(); i++) {
                 if (points[i][0] <= maxindex && points[i][1] >= maxindex) {
                     popped++;
                     for (int j = points[i][0]; j <= points[i][1]; j++) {
                         m[j]--;
                     }
+                    points.erase(points.begin() + i);
                 }
             }
         }
