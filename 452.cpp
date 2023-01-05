@@ -16,9 +16,18 @@ public:
             return 1;
         }
 
-        vector<int> balloons(1, 0);
+        vector<int> balloons;
+        vector<int> balloons2;
         for (int i = 0; i < points.size(); i++) {
             for (int j = points[i][0]; j <= points[i][1]; j++) {
+                if (j < 0) {
+                    j *= -1;
+                    if (j >= balloons2.size()) {
+                        balloons2.resize(j+1, 0);
+                    }
+                    balloons2[j]++;
+                    continue;
+                }
                 if (j >= balloons.size()) {
                     balloons.resize(j+1, 0);
                 }
@@ -26,11 +35,24 @@ public:
             }
         }
 
+        vector<int> balloons3;
+
+        for (int i = 0; i < balloons2.size(); i++) {
+            balloons3.push_back(balloons2[i]);
+        }
+        for (int i = 0; i < balloons.size(); i++) {
+            balloons3.push_back(balloons[i]);
+        }
+
+        balloons = balloons3;
+
+        int offset = balloons2.size();
+
         while (popped < points.size()) {
             int index = distance(balloons.begin(),max_element(balloons.begin(), balloons.end()));
             count++;
             for (int i = 0; i < points.size(); i++) {
-                if (index >= points[i][0] && index <= points[i][1]) {
+                if (index - offset >= points[i][0] && index - offset <= points[i][1]) {
                     for (int j = points[i][0]; j <= points[i][1]; j++) {
                         balloons[j]--;
                     }
