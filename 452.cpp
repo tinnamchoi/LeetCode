@@ -25,26 +25,25 @@ public:
         }
 
         int count = 0;
-        int popped = 0;
-        while (popped != points.size()) {
+        int popped = points.size();
+        while (popped != 0) {
             count++;
             int maxindex;
             int maxvalue = 0;
             for (auto i : m) {
-                cout << i.first << " " << i.second << endl;
                 if (maxvalue < i.second) {
                     maxindex = i.first;
                     maxvalue = i.second;
                 }
             }
-            maxindex--;
             for (int i = 0; i < points.size(); i++) {
                 if (points[i][0] <= maxindex && points[i][1] >= maxindex) {
-                    popped++;
+                    popped--;
                     for (int j = points[i][0]; j <= points[i][1]; j++) {
                         m[j]--;
                     }
                     points.erase(points.begin() + i);
+                    i--;
                 }
             }
         }
