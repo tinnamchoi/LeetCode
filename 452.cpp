@@ -22,14 +22,8 @@ public:
             }
         }
 
-        for (int i : balloons) {
-            cout << i << " ";
-        }
-        cout << endl;
-
         while (popped < points.size()) {
             int index = distance(balloons.begin(),max_element(balloons.begin(), balloons.end()));
-            cout << index << endl;
             count++;
             for (int i = 0; i < points.size(); i++) {
                 if (index >= points[i][0] && index <= points[i][1]) {
