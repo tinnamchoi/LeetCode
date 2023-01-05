@@ -9,45 +9,16 @@ using namespace std;
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
-        if (points.size() == 1) {
-            return 1;
-        }
-
-        map<int, int> m;
-        for (int i = 0; i < points.size(); i++) {
-            for (int j = points[i][0]; j <= points[i][1]; j++) {
-                if (m.find(j) == m.end()) {
-                    m[j] = 1;
-                } else {
-                    m[j]++;
-                }
+        sort(points.begin(), points.end());
+        int count = 1;
+        int temp = 0;
+        for (int i = 1; i < points.size(); i++) {
+            temp++;
+            if (points[i][0] > points[i-temp][1]) {
+                temp = 0;
+                count++;
             }
         }
-
-        int count = 0;
-        int popped = points.size();
-        while (popped != 0) {
-            count++;
-            int maxindex;
-            int maxvalue = 0;
-            for (auto i : m) {
-                if (maxvalue < i.second) {
-                    maxindex = i.first;
-                    maxvalue = i.second;
-                }
-            }
-            for (int i = 0; i < points.size(); i++) {
-                if (points[i][0] <= maxindex && points[i][1] >= maxindex) {
-                    popped--;
-                    for (int j = points[i][0]; j <= points[i][1]; j++) {
-                        m[j]--;
-                    }
-                    points.erase(points.begin() + i);
-                    i--;
-                }
-            }
-        }
-
         return count;
     }
 };
