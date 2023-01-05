@@ -12,6 +12,10 @@ public:
         int count = 0;
         int popped = 0;
 
+        if (points.size() == 1) {
+            return 1;
+        }
+
         vector<int> balloons(1, 0);
         for (int i = 0; i < points.size(); i++) {
             for (int j = points[i][0]; j <= points[i][1]; j++) {
