@@ -9,57 +9,41 @@ using namespace std;
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
-        int count = 0;
-        int popped = 0;
-
-        if (points.size() == 1) {
-            return 1;
-        }
-
-        vector<int> balloons;
-        vector<int> balloons2;
+        map<int, int> m;
         for (int i = 0; i < points.size(); i++) {
             for (int j = points[i][0]; j <= points[i][1]; j++) {
-                if (j < 0) {
-                    j *= -1;
-                    if (j >= balloons2.size()) {
-                        balloons2.resize(j+1, 0);
-                    }
-                    balloons2[j]++;
-                    continue;
+                if (m.find(j) == m.end()) {
+                    m[j] = 1;
+                } else {
+                    m[j]++;
                 }
-                if (j >= balloons.size()) {
-                    balloons.resize(j+1, 0);
-                }
-                balloons[j]++;
             }
         }
 
-        vector<int> balloons3;
-
-        for (int i = 0; i < balloons2.size(); i++) {
-            balloons3.push_back(balloons2[i]);
-        }
-        for (int i = 0; i < balloons.size(); i++) {
-            balloons3.push_back(balloons[i]);
-        }
-
-        balloons = balloons3;
-
-        int offset = balloons2.size();
-
-        while (popped < points.size()) {
-            int index = distance(balloons.begin(),max_element(balloons.begin(), balloons.end()));
+        int count = 0;
+        int popped = 0;
+        while (popped != points.size()) {
             count++;
+            int maxindex;
+            int maxvalue = 0;
+            for (auto i : m) {
+                if (maxvalue < i.second) {
+                    maxindex = i.first;
+                    maxvalue = i.second;
+                }
+            }
             for (int i = 0; i < points.size(); i++) {
-                if (index - offset >= points[i][0] && index - offset <= points[i][1]) {
-                    for (int j = points[i][0]; j <= points[i][1]; j++) {
-                        balloons[j]--;
-                    }
+                if (points[i][0] <= maxindex && points[i][1] >= maxindex) {
                     popped++;
+                    for (int j = points[i][0]; j <= points[i][1]; j++) {
+                        m[j]--;
+                    }
                 }
             }
         }
+
+
+
         return count;
     }
 };
