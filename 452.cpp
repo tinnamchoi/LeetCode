@@ -10,10 +10,6 @@ class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
         sort(points.begin(), points.end());
-        for (auto x : points) {
-            cout << x[0] << " " << x[1] << endl;
-        }
-        cout << endl;
         int count = 1;
         int temp = 0;
         for (int i = 1; i < points.size(); i++) {
@@ -28,7 +24,6 @@ public:
                 count++;
                 temp = 0;
             }
-            cout << temp << " " << count << endl;
         }
         return count;
     }
