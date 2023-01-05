@@ -31,6 +31,7 @@ public:
             int maxindex;
             int maxvalue = 0;
             for (auto i : m) {
+                cout << i.first << " " << i.second << endl;
                 if (maxvalue < i.second) {
                     maxindex = i.first;
                     maxvalue = i.second;
