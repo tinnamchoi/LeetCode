@@ -10,32 +10,49 @@ class Solution {
 public:
     vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
         vector<vector<int>> height = isWater;
-        vector<vector<int>> waters;
         int m = height.size();
         int n = height[0].size();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (height[i][j] == 1) {
-                    waters.push_back({i, j});
-                }
-            }
-        }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                int min = INT_MAX;
                 if (isWater[i][j] == 1) {
-                    min = 0;
-                } else if ((i != 0 && isWater[i - 1][j]) || (i + 1 < m && isWater[i + 1][j]) || (j != 0 && isWater[i][j - 1]) || (j + 1 < n && isWater[i][j + 1])) {
-                    min = 1;
+                    height[i][j] = 0;
                 } else {
-                    for (auto k : waters) {
-                        int dist = abs(k[0] - i) + abs(k[1] - j);
-                        if (dist < min) {
-                            min = dist;
+                    int min;
+                    for (int k = 1; k < max(m, n); k++) {
+                        for (int l = 0; l <= k; l++) {
+                            if (i - (k - l) >= 0) {
+                                if (j - l >= 0) {
+                                    if (isWater[i - (k - l)][j - l] == 1) {
+                                        min = k;
+                                        goto found;
+                                    }
+                                }
+                                if (j + l < n) {
+                                    if (isWater[i - (k - l)][j + l] == 1) {
+                                        min = k;
+                                        goto found;
+                                    }
+                                }
+                            }
+                            if (i + (k - l) < m) {
+                                if (j - l >= 0) {
+                                    if (isWater[i + (k - l)][j - l] == 1) {
+                                        min = k;
+                                        goto found;
+                                    }
+                                }
+                                if (j + l < n) {
+                                    if (isWater[i + (k - l)][j + l] == 1) {
+                                        min = k;
+                                        goto found;
+                                    }
+                                }
+                            }
                         }
                     }
+                    found:
+                    height[i][j] = min;
                 }
-                height[i][j] = min;
             }
         }
         return height;
