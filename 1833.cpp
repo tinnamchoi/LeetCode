@@ -15,9 +15,6 @@ public:
             if (coins < 0) {
                 return i;
             }
-            if (coins == 0) {
-                return i + 1;
-            }
         }
         return costs.size();
     }
