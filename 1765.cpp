@@ -24,7 +24,8 @@ public:
             for (int j = 0; j < n; j++) {
                 int min = INT_MAX;
                 for (auto k : waters) {
-                    if (min == 0) {
+                    if (min == 0 || height[i][j] == 1) {
+                        min = 0;
                         break;
                     }
                     int dist = abs(k[0] - i) + abs(k[1] - j);
