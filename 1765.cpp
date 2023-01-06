@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/* Submission (duplicate) */
+/* Submission */
 
 class Solution {
 public:
@@ -25,8 +25,6 @@ public:
                 int min = INT_MAX;
                 if (isWater[i][j] == 1) {
                     min = 0;
-                } else if ((i != 0 && isWater[i - 1][j]) || (i + 1 != m && isWater[i + 1][j]) || (j != 0 && isWater[i][j - 1]) || (j + 1 != m && isWater[i][j + 1])) {
-                    min = 1;
                 } else {
                     for (auto k : waters) {
                         int dist = abs(k[0] - i) + abs(k[1] - j);
