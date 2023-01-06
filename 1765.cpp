@@ -22,25 +22,19 @@ public:
             }
         }
         bool changed = true;
+        int max = 0;
         while (changed) {
             changed = false;
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     int temp = height[i][j];
-                    if (temp != 0) {
-                        if (i == 0 || height[i - 1][j] >= temp) {
-                            if (i + 1 == m || height[i+1][j] >= temp) {
-                                if (j == 0 || height[i][j - 1] >= temp) {
-                                    if (j + 1 == n || height[i][j + 1] >= temp) {
-                                        height[i][j]++;
-                                        changed = true;
-                                    }
-                                }
-                            }
-                        }
+                    if ((temp != 0 || temp > max) && (i == 0 || height[i - 1][j] >= temp) && (i + 1 == m || height[i+1][j] >= temp) && (j == 0 || height[i][j - 1] >= temp) && (j + 1 == n || height[i][j + 1] >= temp)) {
+                        height[i][j]++;
+                        changed = true;
                     }
                 }
             }
+            max++;
         }
 
         return height;
