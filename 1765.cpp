@@ -18,7 +18,7 @@ public:
                     height[i][j] = 0;
                 } else {
                     int min;
-                    for (int k = 1; k < max(m, n); k++) {
+                    for (int k = 1; k <= max(m, n); k++) {
                         for (int l = 0; l <= k; l++) {
                             if (i - (k - l) >= 0) {
                                 if (j - l >= 0) {
