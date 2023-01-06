@@ -23,12 +23,6 @@ public:
         }
         bool changed = true;
         while (changed) {
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    cout << height[i][j] << " ";
-                }
-                cout << endl;
-            }
             changed = false;
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
@@ -39,6 +33,7 @@ public:
                                 if (j == 0 || height[i][j - 1] == temp) {
                                     if (j + 1 == n || height[i][j + 1] == temp) {
                                         height[i][j]++;
+                                        changed = true;
                                     }
                                 }
                             }
