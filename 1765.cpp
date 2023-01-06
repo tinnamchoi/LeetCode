@@ -28,10 +28,10 @@ public:
                 for (int j = 0; j < n; j++) {
                     int temp = height[i][j];
                     if (temp != 0) {
-                        if (i == 0 || height[i - 1][j] == temp) {
-                            if (i + 1 == m || height[i+1][j] == temp) {
-                                if (j == 0 || height[i][j - 1] == temp) {
-                                    if (j + 1 == n || height[i][j + 1] == temp) {
+                        if (i == 0 || height[i - 1][j] >= temp) {
+                            if (i + 1 == m || height[i+1][j] >= temp) {
+                                if (j == 0 || height[i][j - 1] >= temp) {
+                                    if (j + 1 == n || height[i][j + 1] >= temp) {
                                         height[i][j]++;
                                         changed = true;
                                     }
