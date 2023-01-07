@@ -16,7 +16,6 @@ public:
             int temp = gas[i] - cost[i];
             diff += temp;
             v[i] = temp;
-            cout << v[i] << endl;
         }
         if (diff < 0) {
             return -1;
@@ -27,13 +26,13 @@ public:
             }
             int tank = 0;
             for (int j = i; j < n; j++) {
-                tank += v[i];
+                tank += v[j];
                 if (tank < 0) {
                     goto fail;
                 }
             }
             for (int j = 0; j < i; j++) {
-                tank += v[i];
+                tank += v[j];
                 if (tank < 0) {
                     goto fail;
                 }
@@ -42,6 +41,6 @@ public:
             fail:
             continue;
         }
-        return 0;
+        return -1;
     }
 };
