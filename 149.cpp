@@ -18,22 +18,22 @@ public:
             dpoints[i][0] = (double)points[i][0];
             dpoints[i][1] = (double)points[i][1];
         }
-        map<pair<double, double>, int> map1;
+        map<string, int> map1;
         map<int, int> map2;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                pair<double,double> key;
+                string key;
                 if (dpoints[i][0] == dpoints[j][0]) {
                     if (map2.find(dpoints[i][0]) == map2.end()) {
-                        map2[dpoints[i][0]] = 1;
+                        map2[points[i][0]] = 1;
                     } else {
-                        map2[dpoints[i][0]]++;
+                        map2[points[i][0]]++;
                     }
                 } else {
                     double temp = (dpoints[i][1] - dpoints[j][1]) / (dpoints[i][0] - dpoints[j][0]);
                     double zero = temp * (0 - dpoints[i][0]) + dpoints[i][1];
                     double ones = temp * (1 - dpoints[i][0]) + dpoints[i][1];
-                    key = make_pair(zero, ones);
+                    key = to_string(zero) + to_string(ones);
                     if (map1.find(key) == map1.end()) {
                         map1[key] = 1;
                     } else {
@@ -44,7 +44,6 @@ public:
         }
         int max = 0;
         for (auto i : map1) {
-            cout << i.first.first << "," << i.first.second << ": " << i.second << "\n";
             if (i.second > max) {
                 max = i.second;
             }
