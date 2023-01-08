@@ -31,8 +31,8 @@ public:
                     }
                 } else {
                     double temp = (dpoints[i][1] - dpoints[j][1]) / (dpoints[i][0] - dpoints[j][0]);
-                    double zero = temp * (0 - dpoints[i][0]) + dpoints[i][1];
-                    double ones = temp * (1 - dpoints[i][0]) + dpoints[i][1];
+                    double zero = (double)((int)(temp * (0 - dpoints[i][0]) + dpoints[i][1])*100)/100;
+                    double ones = (double)((int)(temp * (1 - dpoints[i][0]) + dpoints[i][1])*100)/100;
                     key = make_pair(zero, ones);
                     if (map1.find(key) == map1.end()) {
                         map1[key] = 1;
@@ -44,6 +44,7 @@ public:
         }
         int max = 0;
         for (auto i : map1) {
+            cout << i.first.first << "," << i.first.second << ": " << i.second << "\n";
             if (i.second > max) {
                 max = i.second;
             }
@@ -53,6 +54,7 @@ public:
                 max = i.second;
             }
         }
+        cout << "max: " << max << "\n";
         if (max == 1 || max == 2) {
             return max + 1;
         }
