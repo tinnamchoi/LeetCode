@@ -52,6 +52,9 @@ public:
                 max = i.second;
             }
         }
+        if (max == 1 || max == 2) {
+            return n;
+        }
         for (int i = 3; i <= max; i++) {
             int coef = fact(i) / (2 * fact(i - 2));
             if (coef == max) {
