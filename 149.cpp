@@ -30,10 +30,13 @@ public:
                         map2[points[i][0]]++;
                     }
                 } else {
+                    cout << dpoints[i][1] << " " << dpoints[j][1] << " | " << dpoints[i][0] << " " << dpoints[j][0] << "\n";
                     double temp = (dpoints[i][1] - dpoints[j][1]) / (dpoints[i][0] - dpoints[j][0]);
                     double zero = temp * (0 - dpoints[i][0]) + dpoints[i][1];
                     double ones = temp * (1 - dpoints[i][0]) + dpoints[i][1];
-                    key = to_string(zero) + to_string(ones);
+                    stringstream ss;
+                    ss << setprecision(10) << zero << " " << setprecision(10) << ones;
+                    key = ss.str();
                     if (map1.find(key) == map1.end()) {
                         map1[key] = 1;
                     } else {
@@ -53,7 +56,6 @@ public:
                 max = i.second;
             }
         }
-        cout << "max: " << max << "\n";
         if (max == 1 || max == 2) {
             return max + 1;
         }
