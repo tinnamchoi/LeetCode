@@ -6,15 +6,6 @@ using namespace std;
 
 /* Submission */
 
-int fact(int num) {
-    cout << "numbskull " << num << "\n";
-    int temp = 1;
-    for (int i = 1; i <= num; i++) {
-        temp *= i;
-    }
-    return temp;
-}
-
 class Solution {
 public:
     int maxPoints(vector<vector<int>>& points) {
@@ -27,28 +18,37 @@ public:
             dpoints[i][0] = (double)points[i][0];
             dpoints[i][1] = (double)points[i][1];
         }
-        map<pair<double,double>, int> map;
+        map<pair<double, double>, int> map1;
+        map<int, int> map2;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 pair<double,double> key;
                 if (dpoints[i][0] == dpoints[j][0]) {
-                    key = make_pair(0, DBL_MAX - dpoints[i][0]);
+                    if (map2.find(dpoints[i][0]) == map2.end()) {
+                        map2[dpoints[i][0]] = 1;
+                    } else {
+                        map2[dpoints[i][0]]++;
+                    }
                 } else {
                     double temp = (dpoints[i][1] - dpoints[j][1]) / (dpoints[i][0] - dpoints[j][0]);
                     double zero = temp * (0 - dpoints[i][0]) + dpoints[i][1];
                     double ones = temp * (1 - dpoints[i][0]) + dpoints[i][1];
                     key = make_pair(zero, ones);
-                }
-                if (map.find(key) == map.end()) {
-                    map[key] = 1;
-                } else {
-                    map[key]++;
+                    if (map1.find(key) == map1.end()) {
+                        map1[key] = 1;
+                    } else {
+                        map1[key]++;
+                    }
                 }
             }
         }
         int max = 0;
-        for (auto i : map) {
-            cout << i.first.first << "," << i.first.second << ": " << i.second << "\n";
+        for (auto i : map1) {
+            if (i.second > max) {
+                max = i.second;
+            }
+        }
+        for (auto i : map2) {
             if (i.second > max) {
                 max = i.second;
             }
@@ -57,8 +57,7 @@ public:
             return max + 1;
         }
         for (int i = 3; i <= max; i++) {
-            int coef = fact(i) / (2 * fact(i - 2));
-            if (coef == max) {
+            if (i * (i - 1) == 2 * max) {
                 return i;
             }
         }
