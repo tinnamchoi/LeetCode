@@ -53,7 +53,7 @@ public:
             }
         }
         if (max == 1 || max == 2) {
-            return n;
+            return max;
         }
         for (int i = 3; i <= max; i++) {
             int coef = fact(i) / (2 * fact(i - 2));
