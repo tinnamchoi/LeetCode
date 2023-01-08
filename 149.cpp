@@ -7,6 +7,7 @@ using namespace std;
 /* Submission */
 
 int fact(int num) {
+    cout << "numbskull " << num << "\n";
     int temp = 1;
     for (int i = 1; i <= num; i++) {
         temp *= i;
