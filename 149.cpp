@@ -31,8 +31,8 @@ public:
                     }
                 } else {
                     double temp = (dpoints[i][1] - dpoints[j][1]) / (dpoints[i][0] - dpoints[j][0]);
-                    double zero = (double)((int)(temp * (0 - dpoints[i][0]) + dpoints[i][1])*100)/100;
-                    double ones = (double)((int)(temp * (1 - dpoints[i][0]) + dpoints[i][1])*100)/100;
+                    double zero = temp * (0 - dpoints[i][0]) + dpoints[i][1];
+                    double ones = temp * (1 - dpoints[i][0]) + dpoints[i][1];
                     key = make_pair(zero, ones);
                     if (map1.find(key) == map1.end()) {
                         map1[key] = 1;
