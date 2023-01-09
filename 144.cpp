@@ -26,26 +26,23 @@ struct TreeNode {
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
+vector<int> DFS(TreeNode* current, vector<int> out) {
+    if (current == nullptr) {
+        return out;
+    }
+    out.push_back(current->val);
+    out = DFS(current->left, out);
+    out = DFS(current->right, out);
+    return out;
+}
+
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        if (root == nullptr) {
-            return {};
-        }
-        queue<TreeNode*> q;
-        q.push(root);
         vector<int> out;
-        while (!q.empty()) {
-            TreeNode* current = q.front();
-            q.pop();
-            out.push_back(current->val);
-            if (current->left != nullptr) {
-                q.push(current->left);
-            }
-            if (current->right != nullptr) {
-                q.push(current->right);
-            }
-        }
+        out = DFS(root, out);
         return out;
     }
 };
