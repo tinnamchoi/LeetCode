@@ -6,10 +6,16 @@ using namespace std;
 
 /* Submission */
 
+
+
 class StockPrice {
 public:
     unordered_map<int, int> prices;
     int latest = 0;
+    int max = 0;
+    int min = INT_MAX;
+    int maxtime = 0;
+    int mintime = 0;
 
     StockPrice() {}
     
@@ -18,6 +24,32 @@ public:
         if (timestamp > latest) {
             latest = timestamp;
         }
+        if (timestamp == maxtime && price < max) {
+            max = 0;
+            for (auto i : prices) {
+                if (i.second > max) {
+                    maxtime = i.first;
+                    max = i.second;
+                }
+            }
+        }
+        if (price > max) {
+            maxtime = timestamp;
+            max = price;
+        }
+        if (timestamp == mintime && price > min) {
+            min = INT_MAX;
+            for (auto i : prices) {
+                if (i.second < min) {
+                    mintime = i.first;
+                    min = i.second;
+                }
+            }
+        }
+        if (price < min) {
+            mintime = timestamp;
+            min = price;
+        }
     }
     
     int current() {
@@ -25,23 +57,11 @@ public:
     }
     
     int maximum() {
-        int max = 0;
-        for (auto i : prices) {
-            if (i.second > max) {
-                max = i.second;
-            }
-        }
-        return max;
+        return prices[maxtime];
     }
     
     int minimum() {
-        int min = INT_MAX;
-        for (auto i : prices) {
-            if (i.second < min && i.second != 0) {
-                min = i.second;
-            }
-        }
-        return min;
+        return prices[mintime];
     }
 };
 
