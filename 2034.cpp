@@ -8,26 +8,27 @@ using namespace std;
 
 class StockPrice {
 public:
-    vector<int> prices;
+    unordered_map<int, int> prices;
+    int latest = 0;
 
     StockPrice() {}
     
     void update(int timestamp, int price) {
-        if (timestamp - 1 >= prices.size()) {
-            prices.resize(timestamp, 0);
+        prices[timestamp] = price;
+        if (timestamp > latest) {
+            latest = timestamp;
         }
-        prices[timestamp - 1] = price;
     }
     
     int current() {
-        return prices.back();
+        return prices[latest];
     }
     
     int maximum() {
         int max = 0;
-        for (int i : prices) {
-            if (i > max) {
-                max = i;
+        for (auto i : prices) {
+            if (i.second > max) {
+                max = i.second;
             }
         }
         return max;
@@ -35,9 +36,9 @@ public:
     
     int minimum() {
         int min = INT_MAX;
-        for (int i : prices) {
-            if (i < min && i != 0) {
-                min = i;
+        for (auto i : prices) {
+            if (i.second < min && i.second != 0) {
+                min = i.second;
             }
         }
         return min;
