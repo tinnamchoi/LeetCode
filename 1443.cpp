@@ -9,7 +9,7 @@ using namespace std;
 class Solution {
 public:
     int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
-        vector<int> parent(n, 0);
+        vector<int> parent(n, -1);
         for (auto i : edges) {
             if (parent[i[1]] != -1) {
                 parent[i[0]] = i[1];
@@ -24,7 +24,7 @@ public:
             }
             collected[i] = true;
             int temp = parent[i];
-            while (temp != 0) {
+            while (temp != 0 && temp != -1) {
                 collected[temp] = true;
                 temp = parent[temp];
             }
