@@ -22,7 +22,7 @@ public:
                 if (parent[i] == parent[j]) {
                     continue;
                 }
-                parent[i] = parent[j];
+                parent[j] = parent[i];
             }
         }
         vector<int> temp;
@@ -30,18 +30,22 @@ public:
         for (int i : parent) {
             cout << i << endl;
             if (temp.size() == 0) {
-                cout << "pushing " << i;
+                cout << "special pushing " << i << endl;
                 temp.push_back(i);
                 count++;
                 continue;
             }
+            bool exists = false;
             for (int j : temp) {
-                if (i != j) {
-                    cout << "pushing " << i;
-                    temp.push_back(i);
-                    count++;
+                if (i == j) {
+                    exists = true;
                     break;
                 }
+            }
+            if (!exists) {
+                cout << "pushing " << i << endl;
+                temp.push_back(i);
+                count++;
             }
         }
         return count;
