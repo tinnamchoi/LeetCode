@@ -11,6 +11,10 @@ public:
     int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
         vector<int> parent(n, 0);
         for (auto i : edges) {
+            if (parent[i[1]] != -1) {
+                parent[i[0]] = i[1];
+                continue;
+            }
             parent[i[1]] = i[0];
         }
         vector<bool> collected(n, false);
