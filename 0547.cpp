@@ -6,6 +6,13 @@ using namespace std;
 
 /* Submission */
 
+int find(int n, vector<int>& parent) {
+    while (parent[n] != n) {
+        n = parent[n];
+    }
+    return n;
+}
+
 class Solution {
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
@@ -15,37 +22,32 @@ public:
             parent[i] = i;
         }
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (isConnected[i][j] != 1) {
-                    continue;
+            for (int j = i; j < n; j++) {
+                if (isConnected[i][j] == 1) {
+                    int iroot = find(i, parent);
+                    int jroot = find(j, parent);
+                    if (iroot != jroot) {
+                        parent[jroot] = iroot;
+                    }
                 }
-                if (parent[i] == parent[j]) {
-                    continue;
-                }
-                parent[j] = parent[i];
             }
         }
-        vector<int> temp;
+        vector<int> roots;
         int count = 0;
-        for (int i : parent) {
-            cout << i << endl;
-            if (temp.size() == 0) {
-                cout << "special pushing " << i << endl;
-                temp.push_back(i);
-                count++;
-                continue;
-            }
+        for (int i = 0; i < n; i++) {
+            int root = find(i, parent);
+            cout << root << endl;
             bool exists = false;
-            for (int j : temp) {
-                if (i == j) {
+            for (int j : roots) {
+                cout << "root: " << root << ", j: " << j << endl;
+                if (root == j) {
                     exists = true;
                     break;
                 }
             }
-            if (!exists) {
-                cout << "pushing " << i << endl;
-                temp.push_back(i);
+            if (exists == false) {
                 count++;
+                roots.push_back(root);
             }
         }
         return count;
