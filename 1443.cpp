@@ -14,7 +14,7 @@ public:
             parent[i[1]] = i[0];
         }
         vector<bool> collected(n, false);
-        for (auto i = 0; i < n; i++) {
+        for (auto i = 1; i < n; i++) {
             if (hasApple[i] == false) {
                 continue;
             }
