@@ -16,9 +16,12 @@ public:
             }
             return out;
         }
-        for (int i = 1; i <= n; i++) {
-            for (int j = i + 1; j <= n; j++) {
-                out.push_back({i, j});
+        vector<vector<int>> in = combine(n, k - 1);
+        for (auto i : in) {
+            for (int j = i.back() + 1; j <= n; j++) {
+                vector<int> temp = i;
+                temp.push_back(j);
+                out.push_back(temp);
             }
         }
         return out;
