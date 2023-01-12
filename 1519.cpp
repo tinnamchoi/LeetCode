@@ -7,32 +7,36 @@ using namespace std;
 /* Submission */
 
 class Solution {
-public:
-    vector<int> ans;
-    string labels;
-    vector<vector<int>> alist;
+private:
+    vector<int> dfs (int& current, int& parent, vector<vector<int>>& alist, string& labels, vector<int>& ans) {
 
-    vector<int> dfs(int current) {
-        vector<int> count(26, 0);
-        count[labels[current] - 97]++;
-        for (int i : alist[current]) {
-            vector<int> temp = dfs(i);
-            for (int i = 0; i < 26; i++) {
-                count[i] += temp[i];
-            }
+        vector<int> count(26);
+        for (int node : alist[current]) {
+            if (node == parent) {continue;}
+            vector<int> temp = dfs(node, current, alist, labels, ans);
+            for (int i = 0; i < count.size(); i++) count[i] += temp[i];
         }
-        ans[current] = count[labels[current] - 97];
+        
+        count[labels[current] - 'a'] += 1;
+        ans[current] = count[labels[current] - 'a'];
         return count;
     }
 
+public:
     vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
-        this->labels = labels;
-        ans.resize(n);
-        alist.resize(n);
-        for (vector<int> i : edges) {
-            alist[i[0]].push_back(i[1]);
+
+        vector<vector<int>> alist(n);
+        for (vector<int> edge : edges) {
+            alist[edge[0]].push_back(edge[1]);
+            alist[edge[1]].push_back(edge[0]);
         }
-        dfs(0);
+
+        int current = 0;
+        int parent = -1;
+        vector<int> ans(n);
+
+        dfs(current, parent, alist, labels, ans);
+
         return ans;
     }
 };
