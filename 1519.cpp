@@ -8,36 +8,31 @@ using namespace std;
 
 class Solution {
 public:
+    vector<int> ans;
+    string labels;
+    vector<vector<int>> alist;
+
+    vector<int> dfs(int current) {
+        vector<int> count(26, 0);
+        count[labels[current] - 97]++;
+        for (int i : alist[current]) {
+            vector<int> temp = dfs(i);
+            for (int i = 0; i < 26; i++) {
+                count[i] += temp[i];
+            }
+        }
+        ans[current] = count[labels[current] - 97];
+        return count;
+    }
+
     vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
-        if (n == 100000) {
-            return 
+        this->labels = labels;
+        ans.resize(n);
+        alist.resize(n);
+        for (vector<int> i : edges) {
+            alist[i[0]].push_back(i[1]);
         }
-        vector<int> parent(n, -1);
-        for (auto i : edges) { // O(E)
-            if (i[0] == 0) {
-                parent[i[1]] = 0;
-                continue;
-            }
-            if (i[1] == 0) {
-                parent[i[0]] = 0;
-                continue;
-            }
-            if (parent[i[0]] == -1) {
-                parent[i[0]] = i[1];
-                continue;
-            }
-            parent[i[1]] = i[0];
-        }
-        vector<int> ans(n, 1);
-        for (int i = 1; i < n; i++) { // O(V)
-            int temp = i;
-            while (parent[temp] != -1) { // O(V)
-                temp = parent[temp];
-                if (labels[temp] == labels[i]) {
-                    ans[temp]++;
-                }
-            }
-        }
+        dfs(0);
         return ans;
     }
 };
