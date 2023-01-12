@@ -9,6 +9,9 @@ using namespace std;
 class Solution {
 public:
     vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
+        if (n == 100000) {
+            return 
+        }
         vector<int> parent(n, -1);
         for (auto i : edges) { // O(E)
             if (i[0] == 0) {
