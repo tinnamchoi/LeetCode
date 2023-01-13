@@ -8,7 +8,7 @@ using namespace std;
 
 class Solution {
 public:
-    int ans = 0;
+    int ans = 1;
     vector<int> parent;
     vector<vector<int>> child;
     string s;
@@ -43,9 +43,6 @@ public:
     }
     int longestPath(vector<int>& parent, string s) {
         int n = parent.size();
-        if (n == 1) {
-            return 1;
-        }
         this->parent = parent;
         this->s = s;
         child.resize(n);
