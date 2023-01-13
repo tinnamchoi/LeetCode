@@ -42,8 +42,11 @@ public:
         return max + 1;
     }
     int longestPath(vector<int>& parent, string s) {
-        this->parent = parent;
         int n = parent.size();
+        if (n == 1) {
+            return 1;
+        }
+        this->parent = parent;
         this->s = s;
         child.resize(n);
         for (int i = 1; i < n; i++) {
