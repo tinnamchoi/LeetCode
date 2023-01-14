@@ -9,29 +9,20 @@ using namespace std;
 class Solution {
 public:
     bool wordPattern(string pattern, string s) {
-        unordered_map<char, string> umap;
+        unordered_map<char, int> cmap;
+        unordered_map<string, int> smap;
+        
         istringstream iss(s);
-        string word;
-        for (int i = 0; i < pattern.size(); i++) {
-            iss >> word;
-            if (umap.find(pattern[i]) != umap.end()) {
-                if (umap[pattern[i]] != word) {
-                    return false;
-                }
-                continue;
+        int n = pattern.size();
+        int i = 0;
+
+        for (string word; iss >> word; i++) {
+            if (cmap[pattern[i]] != smap[word]) {
+                return false;
             }
-            umap[pattern[i]] = word;
+            cmap[pattern[i]] = smap[word] = i + 1;
         }
-        if (iss.eof() == false) {
-            return false;
-        }
-        for (auto i = umap.begin(); i != umap.end(); i++) {
-            for (auto j = umap.begin(); j != umap.end(); j++) {
-                if (i->first != j->first && i->second == j->second) {
-                    return false;
-                }
-            }
-        }
+
         return true;
     }
 };
