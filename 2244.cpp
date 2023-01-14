@@ -15,7 +15,7 @@ public:
         }
         int count = 0;
         for (auto const& x : map) {
-            int current = x.second
+            int current = x.second;
             if (current == 1) {
                 return -1;
             }
