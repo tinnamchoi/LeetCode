@@ -15,14 +15,15 @@ public:
         }
         int count = 0;
         for (auto const& x : map) {
-            if (x.second == 1) {
+            int current = x.second
+            if (current == 1) {
                 return -1;
             }
-            if (x.second % 3 == 1 || x.second % 3 == 2) {
-                count += x.second / 3 + 1;
+            if (current % 3 == 1 || current % 3 == 2) {
+                count += current / 3 + 1;
                 continue;
             }
-            count += x.second / 3;
+            count += current / 3;
         }
         return count;
     }
