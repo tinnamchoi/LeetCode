@@ -4,13 +4,13 @@
 
 using namespace std;
 
-/* Submission (duplicate) */
+/* Submission */
 
 class Solution {
 public:
     int minimumRounds(vector<int>& tasks) {
-        map<int, int> map;
-        for (int i = 0; i < tasks.size(); i++) {
+        unordered_map<int, int> map;
+        for (int i = 0; i < tasks.size(); i++) { // O(N)
             if (map.find(tasks[i]) == map.end()) {
                 map[tasks[i]] = 1;
             } else {
