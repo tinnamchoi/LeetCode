@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/* Submission (duplicate) */
+/* Submission */
 
 class Solution {
 public:
