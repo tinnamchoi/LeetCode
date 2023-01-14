@@ -11,11 +11,7 @@ public:
     int minimumRounds(vector<int>& tasks) {
         unordered_map<int, int> map;
         for (int i = 0; i < tasks.size(); i++) { // O(N)
-            if (map.find(tasks[i]) == map.end()) {
-                map[tasks[i]] = 1;
-            } else {
-                map[tasks[i]]++;
-            }
+            map[tasks[i]]++;
         }
         int count = 0;
         for (auto const& x : map) {
