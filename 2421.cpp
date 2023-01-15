@@ -16,8 +16,12 @@ public:
         // adjacency list       O(E)
         vector<vector<int>> alist(n);
         for (vector<int> i : edges) {
-            alist[i[0]].push_back(i[1]);
-            alist[i[1]].push_back(i[0]);
+            if (vals[i[1]] <= vals[i[0]]) {
+                alist[i[0]].push_back(i[1]);
+            }
+            if (vals[i[0]] <= vals[i[1]]) {
+                alist[i[1]].push_back(i[0]);
+            }
         }
 
         // main logic
@@ -36,13 +40,13 @@ public:
                     q.pop();
                     visited[current] = true;
                     for (int j : alist[current]) {
-                        if (!visited[j] && vals[j] <= val) {
+                        if (!visited[j]) {
                             q.push(j);
                         }
                     }
 
                 }
-                for (int j = k; j < m; j++) {       // O(N)
+                for (int j = k + 1; j < m; j++) {       // O(N)
                     if (visited[i.second[j]]) {
                         count++;
                     }
@@ -50,6 +54,6 @@ public:
             }
         }
 
-        return count;
+        return count + n;
     }
 };
