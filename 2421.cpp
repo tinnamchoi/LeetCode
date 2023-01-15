@@ -1,60 +1,45 @@
 class Solution {
 public:
-    vector<int> uf;
-
-    int find(int index) {
-        if (uf[index] == index) {
-            return index;
+	int find(vector<int>& uf, int i) {
+		if (i == uf[i]) {
+            return i;
         }
-        return find(uf[index]);
-    }
-    
-    int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {
+		uf[i] = find(uf, uf[i]);
+		return uf[i];
+	}
+
+	int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {
         int n = vals.size();
         int m = edges.size();
+		vector<int> uf(n);
 
-        // map of nodes with same values
-        map<int, vector<int>> valnodes;
-        for (int i = 0; i < n; i++) {
-            valnodes[vals[i]].push_back(i);
-        }
+		vector<vector<int>> x(n);
+		for(int i = 0; i < n; i++){
+			uf[i] = i;
+			x[i] = {vals[i],1};
+		}
 
-        // adjacency list of nodes, smaller nodes only
-        vector<vector<int>> alist(n);
-        for (vector<int> i : edges) {
-            if (i[0] <= i[1]) {
-                alist[i[1]].push_back(i[0]);
-            }
-            if (i[1] <= i[0]) {
-                alist[i[0]].push_back(i[1]);
-            }
-        }
-
-        // union-find
-        for (int i = 0; i < n; i++) {
-            uf[i] = i;
-        }
-
+        sort(edges.begin(), edges.end(), [&](vector<int>& a, vector<int>& b) {
+	    	return max(vals[a[0]], vals[a[1]])<max(vals[b[0]], vals[b[1]]);
+		});
+		
         int count = 0;
-        for (auto i : valnodes) {
-            unordered_map<int, int> sets;
-            for (auto j : i.second) {
-                int min = INT_MAX;
-                for (auto k : alist[j]) {
-                    int root = find(k);
-                    if (vals[root] < vals[min]) {
-                        uf[min] = root;
-                        min = root;
-                    }
-                }
-                uf[j] = min;
-                sets[min]++;
-            }
-            for (auto j : sets) {
-                count += j.second * (j.second - 1) / 2 + j.second;
-            }
-        }
 
-        return count;
-    }
+        for (int i = 0; i < m; i++){
+			int a = find(uf, edges[i][0]);
+			int b = find(uf, edges[i][1]);
+			if (x[a][0] != x[b][0]){
+				if (x[a][0] > x[b][0]) {
+                    uf[b] = a;
+                } else {
+                    uf[a]=b;
+                }
+			} else {
+				uf[a] = b;
+				count += x[a][1] * x[b][1];
+				x[b][1] += x[a][1];
+			}
+		}
+		return count + n;
+	}
 };
