@@ -1,52 +1,33 @@
 class Solution {
 public:
-    int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {
+    int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {      // O(N^2 * (N + E))
         int n = vals.size();
 
         if (n == 1) {
             return 1;
         }
 
-        // map to store list of same vals
+        // map to store list of same vals       O(N)
         unordered_map<int, vector<int>> valnodes(n);
         for (int i = 0; i < n; i++) {
             valnodes[vals[i]].push_back(i);
         }
 
-        // adjacency list
+        // adjacency list       O(E)
         vector<vector<int>> alist(n);
         for (vector<int> i : edges) {
             alist[i[0]].push_back(i[1]);
             alist[i[1]].push_back(i[0]);
         }
 
-        // debug
-        cout << "map" << endl;
-        for (pair<int, vector<int>> i : valnodes) {
-            cout << i.first << ": ";
-            for (int j : i.second) {
-                cout << j << " ";
-            }
-            cout << endl;
-        }
-        cout << "alist" << endl;
-        for (int i = 0; i < n; i++) {
-            cout << i << ": ";
-            for (int j : alist[i]) {
-                cout << j << " ";
-            }
-            cout << endl;
-        }
-        cout << endl;
-
         // main logic
         int count = 0;
-        for (auto i : valnodes) {
+        for (auto i : valnodes) {       // O(N)
             int m = i.second.size();
             int val = i.first;
-            for (int k = 0; k < m; k++) {
+            for (int k = 0; k < m; k++) {       // O(N)
                 int kval = i.second[k];
-                // BFS
+                // BFS      O(N + E)
                 queue<int> q;
                 vector<bool> visited(n, false);
                 q.push(kval);
@@ -61,7 +42,7 @@ public:
                     }
 
                 }
-                for (int j = k; j < m; j++) {
+                for (int j = k; j < m; j++) {       // O(N)
                     if (visited[i.second[j]]) {
                         count++;
                     }
