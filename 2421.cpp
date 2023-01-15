@@ -1,59 +1,60 @@
 class Solution {
 public:
-    int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {      // O(N^2 * (N + E))
-        int n = vals.size();
+    vector<int> uf;
 
-        if (n == 1) {
-            return 1;
+    int find(int index) {
+        if (uf[index] == index) {
+            return index;
         }
+        return find(uf[index]);
+    }
+    
+    int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {
+        int n = vals.size();
+        int m = edges.size();
 
-        // map to store list of same vals       O(N)
-        unordered_map<int, vector<int>> valnodes(n);
+        // map of nodes with same values
+        map<int, vector<int>> valnodes;
         for (int i = 0; i < n; i++) {
             valnodes[vals[i]].push_back(i);
         }
 
-        // adjacency list       O(E)
+        // adjacency list of nodes, smaller nodes only
         vector<vector<int>> alist(n);
         for (vector<int> i : edges) {
-            if (vals[i[1]] <= vals[i[0]]) {
-                alist[i[0]].push_back(i[1]);
-            }
-            if (vals[i[0]] <= vals[i[1]]) {
+            if (i[0] <= i[1]) {
                 alist[i[1]].push_back(i[0]);
             }
-        }
-
-        // main logic
-        int count = 0;
-        for (auto i : valnodes) {       // O(N)
-            int m = i.second.size();
-            int val = i.first;
-            for (int k = 0; k < m; k++) {       // O(N)
-                int kval = i.second[k];
-                // BFS      O(N + E)
-                queue<int> q;
-                vector<bool> visited(n, false);
-                q.push(kval);
-                while (!q.empty()) {
-                    int current = q.front();
-                    q.pop();
-                    visited[current] = true;
-                    for (int j : alist[current]) {
-                        if (!visited[j]) {
-                            q.push(j);
-                        }
-                    }
-
-                }
-                for (int j = k + 1; j < m; j++) {       // O(N)
-                    if (visited[i.second[j]]) {
-                        count++;
-                    }
-                }
+            if (i[1] <= i[0]) {
+                alist[i[0]].push_back(i[1]);
             }
         }
 
-        return count + n;
+        // union-find
+        for (int i = 0; i < n; i++) {
+            uf[i] = i;
+        }
+
+        int count = 0;
+        for (auto i : valnodes) {
+            unordered_map<int, int> sets;
+            for (auto j : i.second) {
+                int min = INT_MAX;
+                for (auto k : alist[j]) {
+                    int root = find(k);
+                    if (vals[root] < vals[min]) {
+                        uf[min] = root;
+                        min = root;
+                    }
+                }
+                uf[j] = min;
+                sets[min]++;
+            }
+            for (auto j : sets) {
+                count += j.second * (j.second - 1) / 2 + j.second;
+            }
+        }
+
+        return count;
     }
 };
