@@ -41,7 +41,8 @@ public:
 
         // main logic
         int count = 0;
-        for (auto i : valnodes) { // list of nodes with same value
+        for (auto i : valnodes) { // list of nodes with same valued
+            cout << "i.first" << i.first << endl;
             int m = i.second.size();
             cout << "m: " << m << endl;
             for (int j = 0; j < m; j++) {
