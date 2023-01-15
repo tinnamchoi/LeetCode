@@ -41,38 +41,34 @@ public:
 
         // main logic
         int count = 0;
-        for (auto i : valnodes) { // list of nodes with same valued
-            cout << "i.first" << i.first << endl;
+        for (auto i : valnodes) {
             int m = i.second.size();
-            cout << "m: " << m << endl;
-            for (int j = 0; j < m; j++) {
-                int jval = i.second[j];
-                cout << "jval: " << jval << endl;
-                int val = vals[jval];
-                for (int k = j; k < m; k++) { // nodes >= self
-                    cout << "k: " << k << endl;
-                    vector<bool> visited(n, false);
-                    queue<int> nodes;
-                    nodes.push(k);
-                    int current;
-                    while (!nodes.empty()) { // BFS
-                        current = nodes.front();
-                        cout << "current: " << current << endl;
-                        if (current == jval) {
-                            count++;
-                            break;
+            int val = i.first;
+            for (int k = 0; k < m; k++) {
+                int kval = i.second[k];
+                // BFS
+                queue<int> q;
+                vector<bool> visited(n, false);
+                q.push(kval);
+                while (!q.empty()) {
+                    int current = q.front();
+                    q.pop();
+                    visited[current] = true;
+                    for (int j : alist[current]) {
+                        if (!visited[j] && vals[j] <= val) {
+                            q.push(j);
                         }
-                        nodes.pop();
-                        visited[current] = true;
-                        for (int l : alist[current]) {
-                            if (!visited[l] && vals[l] <= val) {
-                                nodes.push(l);
-                            }
-                        }
+                    }
+
+                }
+                for (int j = k; j < m; j++) {
+                    if (visited[i.second[j]]) {
+                        count++;
                     }
                 }
             }
         }
+
         return count;
     }
 };
