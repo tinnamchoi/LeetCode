@@ -37,36 +37,41 @@ public:
             }
             cout << endl;
         }
+        cout << endl;
 
         // main logic
         int count = 0;
-        for (auto i : valnodes) {
-            for (int j : i.second) {
-                int m = i.second.size();
-                int val = vals[j];
-                for (int k = j; k < m; k++) {
+        for (auto i : valnodes) { // list of nodes with same value
+            int m = i.second.size();
+            cout << "m: " << m << endl;
+            for (int j = 0; j < m; j++) {
+                int jval = i.second[j];
+                cout << "jval: " << jval << endl;
+                int val = vals[jval];
+                for (int k = j; k < m; k++) { // nodes >= self
+                    cout << "k: " << k << endl;
                     vector<bool> visited(n, false);
                     queue<int> nodes;
                     nodes.push(k);
                     int current;
-                    int prev = -1;
-                    while (!nodes.empty()) {
+                    while (!nodes.empty()) { // BFS
                         current = nodes.front();
+                        cout << "current: " << current << endl;
+                        if (current == jval) {
+                            count++;
+                            break;
+                        }
                         nodes.pop();
+                        visited[current] = true;
                         for (int l : alist[current]) {
-                            if (l == k) {
-                                count++;
-                                goto found;
-                            }
-                            if (l != prev && vals[l] <= val) {
+                            if (!visited[l] && vals[l] <= val) {
                                 nodes.push(l);
                             }
                         }
                     }
-                    found:;
                 }
             }
         }
-        return count + n - 1;
+        return count;
     }
 };
