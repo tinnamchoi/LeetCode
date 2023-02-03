@@ -11,7 +11,9 @@ public:
 
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < iter; j++) {
-                ans.append(1, s[j * loop + i]);
+                if (j * loop + i < n) {
+                    ans.append(1, s[j * loop + i]);
+                } 
                 if (i == 0 || i == numRows - 1) {
                     continue;
                 }
