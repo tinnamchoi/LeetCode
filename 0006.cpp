@@ -16,7 +16,6 @@ public:
         int loop = numRows * 2 - 2;
 
         // Store the number of times the pattern repeats
-        // Adding (n % loop != 0) gives the ceiling of (n / loop)
         int iter = ceil((float)n / (float)(loop));
 
         string ans;
@@ -28,16 +27,18 @@ public:
             for (int j = 0; j < iter; j++) {
                 // Adding the vertical bit
                 // Using a temp variable to check whether the index is out of range
-                if (j * loop + i < n) {
-                    ans.push_back((char)s[j * loop + i]);
+                int temp = j * loop + i;
+                if (temp < n) {
+                    ans.push_back((char)s[temp]);
                 }
                 // No slanted bit to add if we're on either the top or bottom row
                 if (i == 0 || i == numRows - 1) {
                     continue;
                 }
                 // Adding the slanted bit
-                if ((j + 1) * loop - i < n) {
-                    ans.push_back((char)s[(j + 1) * loop - i]);
+                temp = (j + 1) * loop - i;
+                if (temp < n) {
+                    ans.push_back((char)s[temp]);
                 } 
             }
         }
