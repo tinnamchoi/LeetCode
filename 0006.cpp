@@ -2,11 +2,21 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         int n = s.size();
-        if (numRows == 1) {
+
+        // If n <= numRows, then it's a vertical line
+        // If numRows == 1, then it's a horizontal line
+        if (n <= numRows || numRows == 1) {
             return s;
         }
+
+        // The zigzag loops in a pattern
+        // In each loop, there are (numRows * 2 - 2) characters
+        // Due to (numRow) characters on the vertical bit
+        // And (numRow - 2) characters on the slanted bit
         int loop = numRows * 2 - 2;
-        int iter = ceil((float)n / (float)(loop));
+
+        // Store the number of times the pattern repeats
+        int iter = n / loop + (n % loop != 0);
         string ans;
 
         for (int i = 0; i < numRows; i++) {
