@@ -17,7 +17,7 @@ public:
 
         // Store the number of times the pattern repeats
         // Adding (n % loop != 0) gives the ceiling of (n / loop)
-        int iter = n / loop + (n % loop != 0);
+        int iter = ceil((float)n / (float)(loop));
 
         string ans;
 
