@@ -2,6 +2,9 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         int n = s.size();
+        if (numRows == 1) {
+            return s;
+        }
         int loop = numRows * 2 - 2;
         int iter = ceil((float)n / (float)(loop));
         string ans;
