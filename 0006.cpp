@@ -26,13 +26,17 @@ public:
         for (int i = 0; i < numRows; i++) {
             // We'll then iterate through each repeat of the pattern
             for (int j = 0; j < iter; j++) {
+                // Adding the vertical bit
+                // Using a temp variable to check whether the index is out of range
                 int temp = j * loop + i;
                 if (temp < n) {
                     ans.append(1, s[temp]);
-                } 
+                }
+                // No slanted bit to add if we're on either the top or bottom row
                 if (i == 0 || i == numRows - 1) {
                     continue;
                 }
+                // Adding the slanted bit
                 temp = (j + 1) * loop - i;
                 if (temp < n) {
                     ans.append(1, s[temp]);
