@@ -1,56 +1,69 @@
 class Solution {
- public:
-  int romanToInt(string s) {
-    int sum = 0;
-    int i = 0;
-    while (i < s.size()) {
-      if (s[i] == 'I') {
-        if (i + 1 < s.size() && s[i + 1] == 'V') {
-          sum += 4;
-          i += 2;
-        } else if (i + 1 < s.size() && s[i + 1] == 'X') {
-          sum += 9;
-          i += 2;
-        } else {
-          sum += 1;
-          i += 1;
+public:
+    int romanToInt(string s) {
+        int n = s.size();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            switch (s[i]) {
+                case 'I':
+                    if (i + 1 < n) {
+                        switch (s[i + 1]) {
+                            case 'V':
+                                ans += 4 - 1;
+                                i++;
+                                break;
+                            case 'X':
+                                ans += 9 - 1;
+                                i++;
+                                break;
+                        }
+                    }
+                    ans += 1;
+                    break;
+                case 'V':
+                    ans += 5;
+                    break;
+                case 'X':
+                    if (i + 1 < n) {
+                        switch (s[i + 1]) {
+                            case 'L':
+                                ans += 40 - 10;
+                                i++;
+                                break;
+                            case 'C':
+                                ans += 90 - 10;
+                                i++;
+                                break;
+                        }
+                    }
+                    ans += 10;
+                    break;
+                case 'L':
+                    ans += 50;
+                    break;
+                case 'C':
+                    if (i + 1 < n) {
+                        switch (s[i + 1]) {
+                            case 'D':
+                                ans += 400 - 100;
+                                i++;
+                                break;
+                            case 'M':
+                                ans += 900 - 100;
+                                i++;
+                                break;
+                        }
+                    }
+                    ans += 100;
+                    break;
+                case 'D':
+                    ans += 500;
+                    break;
+                case 'M':
+                    ans += 1000;
+                    break;
+            }
         }
-      } else if (s[i] == 'X') {
-        if (i + 1 < s.size() && s[i + 1] == 'L') {
-          sum += 40;
-          i += 2;
-        } else if (i + 1 < s.size() && s[i + 1] == 'C') {
-          sum += 90;
-          i += 2;
-        } else {
-          sum += 10;
-          i += 1;
-        }
-      } else if (s[i] == 'C') {
-        if (i + 1 < s.size() && s[i + 1] == 'D') {
-          sum += 400;
-          i += 2;
-        } else if (i + 1 < s.size() && s[i + 1] == 'M') {
-          sum += 900;
-          i += 2;
-        } else {
-          sum += 100;
-          i += 1;
-        }
-      } else if (s[i] == 'V') {
-        sum += 5;
-        i += 1;
-      } else if (s[i] == 'L') {
-        sum += 50;
-        i += 1;
-      } else if (s[i] == 'D') {
-        sum += 500;
-        i += 1;
-      } else if (s[i] == 'M') {
-        sum += 1000;
-        i += 1;
-      }
+        return ans;
     }
-    return sum;
-  }
 };
