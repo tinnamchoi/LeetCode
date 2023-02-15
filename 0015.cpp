@@ -1,10 +1,11 @@
-/* duplicate duplicate duplicate duplicate duplicate duplicate duplicate duplicate */
-
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         set<int> sums;
         int n = nums.size();
+        if (n == 0) {
+            return {};
+        }
         set<vector<int>> s;
         for (int i = 0; i < n - 2; i++) {
             sums.insert(nums[i]);
