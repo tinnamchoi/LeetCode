@@ -15,7 +15,7 @@ public:
             }
         }
         vector<vector<int>> ans = {};
-        for (auto i : s) {
+        for (auto & i : s) {
             ans.push_back(i);
         }
         return ans;
