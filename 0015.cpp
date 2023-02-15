@@ -1,4 +1,4 @@
-/* duplicate duplicate duplicate duplicate */
+/* duplicate duplicate duplicate duplicate duplicate */
 
 class Solution {
 public:
