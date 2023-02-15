@@ -2,11 +2,11 @@ class Solution {
 public:
     string vint2string(vector<int> nums) {
         string ans = "";
-        ans += nums[0];
+        ans += to_string(nums[0]);
         ans += " ";
-        ans += nums[1];
+        ans += to_string(nums[1]);
         ans += " ";
-        ans += nums[2];
+        ans += to_string(nums[2]);
         return ans;
     }
 
