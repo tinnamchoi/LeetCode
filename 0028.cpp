@@ -4,17 +4,27 @@ public:
         int index = 0; 
         int n = haystack.size();
         int m = needle.size();
+        queue<int> q;
 
         for (int i = 0; i < n; i++) {
-            if (haystack[i] == needle[index]) {
-                index++;
-            } else {
-                index = 0;
-            }
-            if (index == m) {
-                return i - m + 1;
+            if (haystack[i] == needle[0]) {
+                q.push(i);
             }
         }
+
+        while (!q.empty()) {
+            int cur = q.front();
+            q.pop();
+            for (int i = 0; i < m; i++) {
+                if (haystack[cur + i] != needle[i]) {
+                    break;
+                }
+                if (i == m - 1) {
+                    return cur;
+                }
+            }
+        }
+
         return -1;
     }
 };
