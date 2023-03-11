@@ -6,8 +6,12 @@ public:
         int ans = INT_MIN;
 
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                ans = max(ans, (j - i) * min(height[i], height[j]));
+            for (int j = n - 1; j > i; j--) {
+                if (height[j] >= height[i]) {
+                    ans = max(ans, (j - i) * height[i]);
+                    break;
+                }
+                ans = max(ans, (j - i) * height[j]);
             }
         }
 
