@@ -1,23 +1,34 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        unordered_set<int> sums;
+        sort(nums.begin(), nums.end());
+
+        set<vector<int>> uset;
+
         int n = nums.size();
-        set<vector<int>> s;
-        for (int i = 0; i < n - 2; i++) {
-            sums.insert(nums[i]);
-            for (int j = i + 2; j < n; j++) {
-                if (sums.find(0 - nums[i + 1] - nums[j]) != sums.end()) {
-                    vector<int> temp = {nums[i + 1], nums[j], 0 - nums[i + 1] - nums[j]};
-                    sort(temp.begin(), temp.end());
-                    s.insert(temp);
+        for (int i = 0; i < n; i++) {
+            int l = i + 1;
+            int r = n - 1;
+            while (l < r) {
+                int sum = nums[l] + nums[r];
+                if (sum < 0 - nums[i]) {
+                    l++;
+                    continue;
                 }
+                if (sum > 0 - nums[i]) {
+                    r--;
+                    continue;
+                }
+                uset.insert({nums[i], nums[l], nums[r]});
+                l++;
             }
         }
-        vector<vector<int>> ans = {};
-        for (auto & i : s) {
-            ans.push_back(i);
+
+        vector<vector<int>> ans;
+        for (vector<int> v : uset) {
+            ans.push_back(v);
         }
+
         return ans;
     }
 };
