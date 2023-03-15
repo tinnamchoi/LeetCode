@@ -4,7 +4,7 @@ public:
         int n = s.size();
 
         unordered_set<char> exists;
-        int ans = INT_MIN;
+        int ans = 0;
 
         int l = 0;
 
