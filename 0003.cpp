@@ -20,6 +20,7 @@ public:
             }
             exists.insert(s[i]);
         }
+        ans = max(ans, n - l);
 
         return ans;
     }
