@@ -31,6 +31,6 @@ public:
                     break;
             }
         }
-        return true;
+        return stk.empty();
     }
 };
