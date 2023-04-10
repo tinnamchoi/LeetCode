@@ -6,21 +6,21 @@ public:
             cout << c << endl;
             switch (c) {
                 case ')':
-                    if (stk.top() == '(') {
+                    if (!stk.empty() && stk.top() == '(') {
                         stk.pop();
                     } else {
                         return false;
                     }
                     break;
                 case '}':
-                    if (stk.top() == '{') {
+                    if (!stk.empty() && stk.top() == '{') {
                         stk.pop();
                     } else {
                         return false;
                     }
                     break;
                 case ']':
-                    if (stk.top() == '[') {
+                    if (!stk.empty() && stk.top() == '[') {
                         stk.pop();
                     } else {
                         return false;
