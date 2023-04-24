@@ -14,7 +14,7 @@ public:
                         continue;
                     }
                     if (ans_size < j * 2 - 1) {
-                        ans_index = i - j;
+                        ans_index = i - j + 1;
                         ans_size = j * 2 - 1;
                     }
                     size = -1;
