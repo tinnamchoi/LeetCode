@@ -1,4 +1,4 @@
-/* Minimum Rounds to Complete All Tasks */
+/* Minimum Number of Arrows to Burst Balloons */
 
 #include <bits/stdc++.h>
 
