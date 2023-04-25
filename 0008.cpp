@@ -10,11 +10,13 @@ public:
             if (c == ' ' && !reading) {
                 continue;
             }
-            if (c == '-' || c == '+' && !reading) {
+            if ((c == '-' || c == '+') && !reading) {
                 neg = c == '-';
+                reading = true;
                 continue;
             }
             if (c >= '0' && c <= '9') {
+                reading = true;
                 ans *= 10;
                 ans += c - '0';
                 if (neg && -1 * ans < INT_MIN) {
