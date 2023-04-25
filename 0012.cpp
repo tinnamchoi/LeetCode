@@ -74,7 +74,6 @@ public:
                 ans += "CC";
                 break;
             case 3:
-                break;
                 ans += "CCC";
                 break;
             case 4:
