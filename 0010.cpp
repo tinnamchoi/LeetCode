@@ -29,7 +29,6 @@ private:
     }
 public:
     bool isMatch(string s, string p) {
-        cout << s << " " << p << endl;
         this->s = s;
         this->p = p;
 
