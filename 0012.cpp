@@ -28,7 +28,6 @@ public:
                 ans += "IV";
                 break;
             case 7:
-                break;
                 ans += "IIV";
                 break;
             case 8:
