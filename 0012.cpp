@@ -8,62 +8,15 @@ public:
 
         string ans;
 
-        switch (digit) {
+        switch (thousand) {
             case 1:
-                ans += "I";
+                ans += "M";
                 break;
             case 2:
-                ans += "II";
+                ans += "MM";
                 break;
             case 3:
-                ans += "III";
-                break;
-            case 4:
-                ans += "VI";
-                break;
-            case 5:
-                ans += "V";
-                break;
-            case 6:
-                ans += "IV";
-                break;
-            case 7:
-                ans += "IIV";
-                break;
-            case 8:
-                ans += "IIIV";
-                break;
-            case 9:
-                ans += "XI";
-                break;
-        }
-        switch (ten) {
-            case 1:
-                ans += "X";
-                break;
-            case 2:
-                ans += "XX";
-                break;
-            case 3:
-                ans += "XXX";
-                break;
-            case 4:
-                ans += "LX";
-                break;
-            case 5:
-                ans += "L";
-                break;
-            case 6:
-                ans += "XL";
-                break;
-            case 7:
-                ans += "XXL";
-                break;
-            case 8:
-                ans += "XXXL";
-                break;
-            case 9:
-                ans += "CX";
+                ans += "MMM";
                 break;
         }
         switch (hundred) {
@@ -77,36 +30,83 @@ public:
                 ans += "CCC";
                 break;
             case 4:
-                ans += "DC";
+                ans += "CD";
                 break;
             case 5:
                 ans += "D";
                 break;
             case 6:
-                ans += "CD";
+                ans += "DC";
                 break;
             case 7:
-                ans += "CCD";
+                ans += "DCC";
                 break;
             case 8:
-                ans += "CCCD";
+                ans += "DCCC";
                 break;
             case 9:
-                ans += "MC";
+                ans += "CM";
                 break;
         }
-        switch (thousand) {
+        switch (ten) {
             case 1:
-                ans += "M";
+                ans += "X";
                 break;
             case 2:
-                ans += "MM";
+                ans += "XX";
                 break;
             case 3:
-                ans += "MMM";
+                ans += "XXX";
+                break;
+            case 4:
+                ans += "XL";
+                break;
+            case 5:
+                ans += "L";
+                break;
+            case 6:
+                ans += "LX";
+                break;
+            case 7:
+                ans += "LXX";
+                break;
+            case 8:
+                ans += "LXXX";
+                break;
+            case 9:
+                ans += "XC";
                 break;
         }
-        reverse(ans.begin(), ans.end());
+        switch (digit) {
+            case 1:
+                ans += "I";
+                break;
+            case 2:
+                ans += "II";
+                break;
+            case 3:
+                ans += "III";
+                break;
+            case 4:
+                ans += "IV";
+                break;
+            case 5:
+                ans += "V";
+                break;
+            case 6:
+                ans += "VI";
+                break;
+            case 7:
+                ans += "VII";
+                break;
+            case 8:
+                ans += "VIII";
+                break;
+            case 9:
+                ans += "IX";
+                break;
+        }
+
         return ans;
     }
 };
