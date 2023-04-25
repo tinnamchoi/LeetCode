@@ -6,7 +6,7 @@ private:
     int np;
 
     bool IM(int is, char prefix, int ip) {
-        if (is == ns && ip == np) {
+        if (is == ns && ip == np || (p[ip] == '*' && IM(is, 0, ip + 1)) || (ip + 1 < np && p[ip + 1] == '*' && IM(is, 0, ip + 2))) {
             return true;
         }
         if (is == ns) {
