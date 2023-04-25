@@ -1,11 +1,3 @@
-/* Minimum Number of Arrows to Burst Balloons */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {

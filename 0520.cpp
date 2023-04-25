@@ -1,11 +1,3 @@
-/* Detect Capital */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     bool detectCapitalUse(string word) {

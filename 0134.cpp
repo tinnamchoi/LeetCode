@@ -1,11 +1,3 @@
-/* Gas Station */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {

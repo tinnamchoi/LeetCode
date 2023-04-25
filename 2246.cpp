@@ -1,11 +1,3 @@
-/* Longest Path With Different Adjacent Characters */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     int ans = 1;

@@ -1,11 +1,3 @@
-/* Combinations */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     vector<vector<int>> combine(int n, int k) {

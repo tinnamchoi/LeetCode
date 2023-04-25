@@ -1,11 +1,3 @@
-/* Minimum Time to Collect All Apples in a Tree */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {

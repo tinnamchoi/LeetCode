@@ -1,11 +1,3 @@
-/* Delete Columns to Make Sorted */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     int minDeletionSize(vector<string>& strs) {

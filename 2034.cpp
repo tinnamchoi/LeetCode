@@ -1,11 +1,3 @@
-/* Stock Price Fluctuation */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 
 
 class StockPrice {

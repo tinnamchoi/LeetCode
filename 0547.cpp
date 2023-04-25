@@ -1,11 +1,3 @@
-/* Number of Provinces */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 int find(int n, vector<int>& parent) {
     while (parent[n] != n) {
         n = parent[n];

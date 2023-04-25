@@ -1,11 +1,3 @@
-/* Minimum Rounds to Complete All Tasks */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     int minimumRounds(vector<int>& tasks) {

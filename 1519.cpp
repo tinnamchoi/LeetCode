@@ -1,11 +1,3 @@
-/* Number of Nodes in the Sub-Tree With the Same Label */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 private:
     vector<int> dfs (int& current, int& parent, vector<vector<int>>& alist, string& labels, vector<int>& ans) {

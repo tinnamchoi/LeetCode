@@ -1,11 +1,3 @@
-/* Maximum Ice Cream Bars */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     int maxIceCream(vector<int>& costs, int coins) {

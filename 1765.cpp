@@ -1,11 +1,3 @@
-/* Map of Highest Peak */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {

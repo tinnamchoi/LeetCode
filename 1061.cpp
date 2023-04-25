@@ -1,11 +1,3 @@
-/* Lexicographically Smallest Equivalent String */
-
-#include <bits/stdc++.h>
-
-using namespace std;
-
-/* Submission */
-
 class Solution {
 public:
     string smallestEquivalentString(string s1, string s2, string baseStr) {
