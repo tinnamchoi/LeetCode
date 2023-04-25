@@ -8,7 +8,6 @@ private:
     vector<vector<unordered_map<char, bool>>> dp;
 
     bool IM(int is, int ip, char prefix) {
-        cout << "is: " << is << ", ip: " << ip << ", prefix: " << (int)prefix << endl;
         bool ans;
         if (dp[is][ip].find(prefix) != dp[is][ip].end()) {
             ans =  dp[is][ip][prefix];
