@@ -17,7 +17,7 @@ public:
             }
             if (c >= '0' && c <= '9') {
                 reading = true;
-                if (ans != 0 && INT_MAX / ans < 10) {
+                if (ans != 0 && (INT_MAX / ans < 10 || INT_MAX - ans * 10 < c - '0')) {
                     return neg ? INT_MIN : INT_MAX;
                 }
                 ans *= 10;
