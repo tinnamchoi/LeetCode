@@ -9,7 +9,6 @@ public:
             int r = n - 1;
             while (l < r) {
                 long sum = nums[i] + nums[l] + nums[r];
-                cout << "ans: " << ans << ", sum: " << sum << endl;
                 ans = max(ans, target) - min(ans, target) > max(sum, target) - min(sum, target) ? sum : ans;
                 if (sum > target) {
                     r--;
