@@ -25,9 +25,7 @@ public:
                 }
                 continue;
             }
-            if (reading) {
-                break;
-            }
+            break;
         } 
         return (neg ? -1 : 1) * ans;
     }
