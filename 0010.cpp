@@ -21,7 +21,7 @@ private:
         if (p[ip] == '.') {
             return IM(is + 1, 0, ip + 1);
         }
-        return (s[is] == p[ip] && IM(is + 1, 0, ip + 1));
+        return (s[is] == p[ip] && IM(is + 1, 0, ip + 1)) || (ip + 1 < np && p[ip + 1] == '*' && IM(is, 0, ip + 1));
     }
 public:
     bool isMatch(string s, string p) {
