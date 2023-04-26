@@ -21,7 +21,7 @@ public:
 
         while (then) {
             ListNode* new_curr = then->next;
-            ListNode* new_then = then->next ? then->next->next : nullptr;
+            ListNode* new_then = then->next ? then->next->next : then->next;
             curr->next = new_then;
             then->next = curr;
             curr = new_curr;
