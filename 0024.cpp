@@ -22,7 +22,7 @@ public:
         while (then) {
             ListNode* new_curr = then->next;
             ListNode* new_then = then->next ? then->next->next : then->next;
-            curr->next = new_then;
+            curr->next = then->next ? then->next->next ? then->next->next : then->next : nullptr;
             then->next = curr;
             curr = new_curr;
             then = new_then;
