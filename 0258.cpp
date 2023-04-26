@@ -10,7 +10,7 @@ private:
     }
 public:
     int addDigits(int num) {
-        while (num > 9) {
+        while (num >= 10) {
             num = digit_sum(num);
         }
         return num;
