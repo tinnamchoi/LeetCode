@@ -10,14 +10,14 @@ public:
         int l = 0;
         int r = n - 1;
 
-        while (l < r) {
+        while (l <= r) {
             int m = l + (r - l) / 2;
             if (nums[m] < target) {
                 l = m + 1;
                 continue;
             }
             if ((nums[m] == target && m > 0 && nums[m - 1] == target) || nums[m] > target) {
-                r = m;
+                r = m - 1;
                 continue;
             }
             ans[0] = m;
