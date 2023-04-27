@@ -26,7 +26,7 @@ public:
         while (l < r) {
             int m = l + (r - l) / 2;
             if (nums[m] == target && (m == n - 1 || nums[m + 1] > target)) {
-                ans[1] = m;
+                l = m;
                 break;
             } else if (nums[m] == target) {
                 l = m + 1;
@@ -34,6 +34,7 @@ public:
                 r = m;
             }
         }
+        ans[1] = l;
         return ans;
     }
 };
